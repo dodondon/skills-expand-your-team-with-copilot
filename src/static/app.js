@@ -823,7 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             activityDiv.addEventListener("click", handleActivation);
             activityDiv.addEventListener("keydown", (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === 'Enter' || e.key === ' ' || e.key === 'Space') {
                 e.preventDefault();
                 handleActivation();
               }
