@@ -498,7 +498,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (platform === 'email') {
         window.location.href = shareUrl;
       } else {
-        window.open(shareUrl, '_blank', 'width=600,height=400');
+        // Open in new window without fixed dimensions to support different screen sizes
+        window.open(shareUrl, '_blank', 'noopener,noreferrer');
       }
     }
   }
@@ -637,9 +638,17 @@ document.addEventListener("DOMContentLoaded", () => {
       button.addEventListener("click", (e) => {
         e.preventDefault();
         const activityName = button.dataset.activity;
-        const platform = button.classList.contains('share-twitter') ? 'twitter' :
-                        button.classList.contains('share-facebook') ? 'facebook' :
-                        button.classList.contains('share-linkedin') ? 'linkedin' : 'email';
+        
+        // Determine platform based on button classes
+        let platform = 'email';
+        if (button.classList.contains('share-twitter')) {
+          platform = 'twitter';
+        } else if (button.classList.contains('share-facebook')) {
+          platform = 'facebook';
+        } else if (button.classList.contains('share-linkedin')) {
+          platform = 'linkedin';
+        }
+        
         shareActivity(activityName, platform);
       });
     });
