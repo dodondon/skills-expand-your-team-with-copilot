@@ -8,7 +8,7 @@ import os
 
 # Try to connect to MongoDB, fallback to mongomock if not available
 try:
-    client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=1000)
+    client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=5000)
     # Force a connection to test if MongoDB is available
     client.server_info()
     print("Connected to MongoDB")

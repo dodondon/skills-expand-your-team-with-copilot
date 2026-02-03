@@ -834,6 +834,16 @@ footer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.calendar-activity:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+.calendar-activity[role="button"] {
+  cursor: pointer;
+}
+
 .calendar-activity.sports {
   background-color: #66bb6a;
 }

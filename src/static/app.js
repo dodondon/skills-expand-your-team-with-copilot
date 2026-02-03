@@ -799,6 +799,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const activityDiv = document.createElement("div");
             activityDiv.className = `calendar-activity ${activity.type}`;
             activityDiv.title = `${activity.name}\n${formatSchedule(activity.details)}\n${activity.details.participants.length}/${activity.details.max_participants} enrolled`;
+            activityDiv.setAttribute('role', 'button');
+            activityDiv.setAttribute('tabindex', '0');
+            activityDiv.setAttribute('aria-label', `${activity.name}, ${formatSchedule(activity.details)}, ${activity.details.participants.length} of ${activity.details.max_participants} enrolled`);
             
             const nameSpan = document.createElement("span");
             nameSpan.className = "calendar-activity-name";
@@ -812,9 +815,17 @@ document.addEventListener("DOMContentLoaded", () => {
             activityDiv.appendChild(infoSpan);
             
             // Make clickable to open registration modal
-            activityDiv.addEventListener("click", () => {
+            const handleActivation = () => {
               if (currentUser && activity.details.participants.length < activity.details.max_participants) {
                 openRegistrationModal(activity.name);
+              }
+            };
+            
+            activityDiv.addEventListener("click", handleActivation);
+            activityDiv.addEventListener("keydown", (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleActivation();
               }
             });
             
